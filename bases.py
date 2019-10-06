@@ -1,44 +1,35 @@
-def switch_base(input_base, input_number, output_base):
-    number = 0
-    for digit_index in range(len(input_number)):
-        number += input_base ** digit_index * input_number[-digit_index - 1]
-
-    output = []
-    while number != 0:
-        output.append(number % output_base)
-        number = number // output_base
-
-    return output[::-1]  # shortcut to reverse the list
-
-representation_dictionnary = (
-    "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/"
-)
-# 64 is the maximum base that can be represented using this method
-def get_representation(input_number):
-    # for digit in input_number:
-    ouput_representation = ""
-    for digit in input_number:
-        ouput_representation += representation_dictionnary[digit]
-    return ouput_representation
-
-def to_digit_array(string_representation):
+def DeuxVersDix(N): # N (2) -> N (10) | N (2) _doit_ être un String
     digit_array = []
-    for char in string_representation:
-        digit_array.append(representation_dictionnary.index(char))
-    return digit_array
+    for char in N:
+        digit_array.append("01".index(char))
+    base_10_de_N = 0
+    for digit_index in range(len(digit_array)):
+        base_10_de_N += 2 ** digit_index * digit_array[-digit_index - 1]
+    return base_10_de_N
+
+def DixVersDeux(N): # N (10) -> N (2) | N (10) _doit_ être in Integer
+    output = ""
+    while N != 0:
+        output = "{}{}".format(N % 2, output)
+        N = N // 2
+    return output
 
 
-input_representation = input("please enter a number in any base (e.g. 123 or A0):")
-input_base = int(input("please enter this number base (e.g. 2, 10 or 16):"))
-input_number = to_digit_array(input_representation)
-output_base = int(
-    input("please enter the base you want your number to be converted in:")
-)
-output_number = switch_base(input_base, input_number, output_base)
+DeuxVersDix( "101")
+nom_de_la_fonction = input("Voulez-vous utiliser la fonction \"DeuxVersDix\" ou bien \"DixVersDeux\" (réponse insensible à la case) : ").lower()
 
-print(
-    "{} in base {} is equals to {} in base {}".format(
-        input_representation, input_base, get_representation(output_number), output_base
-    )
-)
+while True:
+    if nom_de_la_fonction == "deuxversdix":
+        nombre_binaire = input("Rentrez la représentation binaire d'un nombre, vous pouvez utiliser les chiffres 0 et 1 : ")
+        print("La représentation décimale de ce nombre est {}".format( DeuxVersDix(nombre_binaire) ))
+    elif nom_de_la_fonction == "dixversdeux":
+        nombre_decimal = int(input("Rentrez la représentation décimale d'un nombre, vous pouvez utiliser les chiffres 0, 1, 2, 3, 4, 5, 6, 7, 8 et 9 : "))
+        print("La représentation binaire de ce nombre est {}".format( DixVersDeux(nombre_decimal) ))
+    else:
+        print("erreur : le nom de fonction n'est pas reconnu")
+    if input("Voulez-vous recommencer (oui pour recommencer) : ").lower() != "oui":
+        print("Vous avez bien quitté le programme")
+        break
+
+
 
