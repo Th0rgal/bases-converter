@@ -15,10 +15,8 @@ def DixVersDeux(N): # N (10) -> N (2) | N (10) _doit_ être in Integer
     return output
 
 
-DeuxVersDix( "101")
-nom_de_la_fonction = input("Voulez-vous utiliser la fonction \"DeuxVersDix\" ou bien \"DixVersDeux\" (réponse insensible à la case) : ").lower()
-
 while True:
+    nom_de_la_fonction = input("Voulez-vous utiliser la fonction \"DeuxVersDix\" ou bien \"DixVersDeux\" (réponse insensible à la case) : ").lower()
     if nom_de_la_fonction == "deuxversdix":
         nombre_binaire = input("Rentrez la représentation binaire d'un nombre, vous pouvez utiliser les chiffres 0 et 1 : ")
         print("La représentation décimale de ce nombre est {}".format( DeuxVersDix(nombre_binaire) ))
@@ -30,6 +28,3 @@ while True:
     if input("Voulez-vous recommencer (oui pour recommencer) : ").lower() != "oui":
         print("Vous avez bien quitté le programme")
         break
-
-
-
